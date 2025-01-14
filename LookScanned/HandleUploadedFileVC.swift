@@ -242,9 +242,9 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         
         let firstPageImage = convertPDFPageToImage(url: pdfURL!, pageNumber: 1)
         
-        if let updatedImage = makeImageLookScanned(image: firstPageImage!) {
-                documentFirstPageImageView.image = updatedImage // Update the UI
-            }
+        documentFirstPageImageView.image = makeImageLookScanned(image: firstPageImage ?? UIImage())
+
+
     }
     
     
