@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="iPad13_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LookScanned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1032" height="1376"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWT-FI-rqL">
-                                <rect key="frame" x="396" y="568" width="240" height="240"/>
+                                <rect key="frame" x="100" y="358" width="240" height="240"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-file" translatesAutoresizingMaskIntoConstraints="NO" id="Fzn-zp-ECq">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
@@ -70,21 +70,37 @@
             <objects>
                 <viewController id="nED-5h-eG4" customClass="HandleUploadedFileVC" customModule="LookScanned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V8v-rP-bdd">
-                        <rect key="frame" x="0.0" y="0.0" width="580" height="640"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="946"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pem-iA-gnD">
-                                <rect key="frame" x="-10" y="111" width="600" height="418"/>
+                                <rect key="frame" x="-108" y="237.66666666666666" width="656" height="470.66666666666674"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample-221-g-yellow-slip" translatesAutoresizingMaskIntoConstraints="NO" id="8BY-ph-gna">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="379.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="656" height="379.66666666666669"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="379.5" id="gXQ-IP-3IM"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180.5" id="mRQ-uj-pjb"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blurness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ2-ZZ-N7y">
+                                        <rect key="frame" x="0.0" y="379.66666666666674" width="656" height="22.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-dT-P7B">
+                                        <rect key="frame" x="-2" y="402.33333333333337" width="660" height="31"/>
+                                        <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="656" id="wnL-zz-Q83"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="blurnessSlider:" destination="nED-5h-eG4" eventType="valueChanged" id="GGo-H7-Rd7"/>
+                                        </connections>
+                                    </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhq-Ac-2Zb">
-                                        <rect key="frame" x="0.0" y="379.5" width="600" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="432.33333333333337" width="656" height="38.333333333333314"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Export"/>
                                         <connections>
@@ -103,6 +119,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cSM-sO-BEv"/>
                     <connections>
+                        <outlet property="blurnessSliderWidthUI" destination="wnL-zz-Q83" id="H0B-QP-k9g"/>
                         <outlet property="documentFirstPageImageView" destination="8BY-ph-gna" id="Pla-DW-1ac"/>
                         <outlet property="downloadButton" destination="qhq-Ac-2Zb" id="Tjq-TV-0pL"/>
                     </connections>

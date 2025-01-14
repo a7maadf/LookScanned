@@ -9,6 +9,10 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBOutlet weak var mainStackHeight: NSLayoutConstraint!
     @IBOutlet weak var mainStackWidth: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var blurnessSliderWidthUI: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var documentFirstPageImageView: UIImageView!
     
     
@@ -17,11 +21,12 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     var isAccessingSecurityScopedResource = false
     var pdfURL: URL?
+    var BlurValue: Float = 0.3
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        let screenSize: CGRect = UIScreen.main.bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         //        mainStackHeight.constant = screenSize.height * 0.85
         //        mainStackWidth.constant = screenSize.width * 0.85
         
@@ -42,6 +47,8 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         } else {
             print("Error: Unable to access security-scoped resource.")
         }
+        
+        blurnessSliderWidthUI.constant = screenSize.width * 0.85
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,7 +75,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         // 2. Apply a very subtle blur
         guard let blurFilter = CIFilter(name: "CIGaussianBlur") else { return nil }
         blurFilter.setValue(grayscaleImage, forKey: kCIInputImageKey)
-        blurFilter.setValue(0.3, forKey: kCIInputRadiusKey) // Reduced blur for sharpness
+        blurFilter.setValue(BlurValue, forKey: kCIInputRadiusKey) // Reduced blur for sharpness
         guard let blurredImage = blurFilter.outputImage else { return nil }
         
         // 3. Add small noise
@@ -228,6 +235,18 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         
         
     }
+    
+    
+    @IBAction func blurnessSlider(_ sender: UISlider) {
+        BlurValue = sender.value
+        
+        let firstPageImage = convertPDFPageToImage(url: pdfURL!, pageNumber: 1)
+        
+        if let updatedImage = makeImageLookScanned(image: firstPageImage!) {
+                documentFirstPageImageView.image = updatedImage // Update the UI
+            }
+    }
+    
     
     
 }
