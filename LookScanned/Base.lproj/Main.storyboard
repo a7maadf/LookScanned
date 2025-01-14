@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="iPad13_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LookScanned" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1032" height="1376"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWT-FI-rqL">
+                                <rect key="frame" x="396" y="568" width="240" height="240"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload-file" translatesAutoresizingMaskIntoConstraints="NO" id="Fzn-zp-ECq">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="TvY-7W-2O8"/>
+                                            <constraint firstAttribute="width" constant="240" id="c4Q-af-vVS"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cep-OA-nZH">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="8k8-wO-LsW"/>
+                                            <constraint firstAttribute="width" constant="240" id="Fe7-xm-xAh"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="uploadButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VZy-IM-aCy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="4di-D6-Akf"/>
+                                    <constraint firstItem="Fzn-zp-ECq" firstAttribute="centerY" secondItem="QWT-FI-rqL" secondAttribute="centerY" id="Dt4-sO-DaV"/>
+                                    <constraint firstAttribute="width" constant="240" id="Zk4-pv-ljl"/>
+                                    <constraint firstItem="cep-OA-nZH" firstAttribute="centerY" secondItem="QWT-FI-rqL" secondAttribute="centerY" id="aWu-gc-pp3"/>
+                                    <constraint firstItem="Fzn-zp-ECq" firstAttribute="centerX" secondItem="QWT-FI-rqL" secondAttribute="centerX" id="bPM-bg-dg0"/>
+                                    <constraint firstItem="cep-OA-nZH" firstAttribute="centerX" secondItem="QWT-FI-rqL" secondAttribute="centerX" id="dAH-1j-9WB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QWT-FI-rqL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bYY-gG-OkI"/>
+                            <constraint firstItem="QWT-FI-rqL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yTj-Lo-KoX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="nED-5h-eG4" kind="show" identifier="showPDFPage" id="u3z-tS-bZi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="111" y="-8"/>
+        </scene>
+        <!--Handle Uploaded FileVC-->
+        <scene sceneID="iT1-LB-Kse">
+            <objects>
+                <viewController id="nED-5h-eG4" customClass="HandleUploadedFileVC" customModule="LookScanned" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V8v-rP-bdd">
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="640"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pem-iA-gnD">
+                                <rect key="frame" x="-10" y="111" width="600" height="418"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample-221-g-yellow-slip" translatesAutoresizingMaskIntoConstraints="NO" id="8BY-ph-gna">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="379.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="379.5" id="gXQ-IP-3IM"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180.5" id="mRQ-uj-pjb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhq-Ac-2Zb">
+                                        <rect key="frame" x="0.0" y="379.5" width="600" height="38.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Export"/>
+                                        <connections>
+                                            <action selector="downloadButtonPressed:" destination="nED-5h-eG4" eventType="touchUpInside" id="yig-X3-ISj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Eg0-QW-Jpg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Pem-iA-gnD" firstAttribute="centerY" secondItem="V8v-rP-bdd" secondAttribute="centerY" id="3v1-EA-qgN"/>
+                            <constraint firstItem="Pem-iA-gnD" firstAttribute="centerX" secondItem="V8v-rP-bdd" secondAttribute="centerX" id="nof-HH-LeI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cSM-sO-BEv"/>
+                    <connections>
+                        <outlet property="documentFirstPageImageView" destination="8BY-ph-gna" id="Pla-DW-1ac"/>
+                        <outlet property="downloadButton" destination="qhq-Ac-2Zb" id="Tjq-TV-0pL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZMl-yc-D9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954.96183206106866" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Sample-221-g-yellow-slip" width="600" height="873"/>
+        <image name="upload-file" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
