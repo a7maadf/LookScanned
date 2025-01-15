@@ -239,12 +239,34 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     @IBAction func blurnessSlider(_ sender: UISlider) {
         BlurValue = sender.value
-        
-        let firstPageImage = convertPDFPageToImage(url: pdfURL!, pageNumber: 1)
-        
-        documentFirstPageImageView.image = makeImageLookScanned(image: firstPageImage ?? UIImage())
 
+        // Safely unwrap `pdfURL`
+        guard let pdfURL = pdfURL else {
+            print("Error: pdfURL is nil")
+            return
+        }
 
+        // Access the security-scoped resource
+        if pdfURL.startAccessingSecurityScopedResource() {
+            defer { pdfURL.stopAccessingSecurityScopedResource() }
+
+            // Attempt to get the first page image
+            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
+                print("Error: Failed to convert PDF page to image")
+                return
+            }
+
+            // Attempt to process the image
+            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
+                print("Error: Failed to process image with makeImageLookScanned")
+                return
+            }
+
+            // Update the UI
+            documentFirstPageImageView.image = updatedImage
+        } else {
+            print("Error: Unable to access security-scoped resource")
+        }
     }
     
     
