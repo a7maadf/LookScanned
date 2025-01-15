@@ -26,6 +26,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
         let screenSize: CGRect = UIScreen.main.bounds
         //        mainStackHeight.constant = screenSize.height * 0.85
         //        mainStackWidth.constant = screenSize.width * 0.85
@@ -48,7 +49,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             print("Error: Unable to access security-scoped resource.")
         }
         
-        blurnessSliderWidthUI.constant = screenSize.width * 0.85
+        blurnessSliderWidthUI.constant = screenSize.width * 0.65
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -215,6 +216,8 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
+        
+        
         // Disable the button and update the title
         downloadButton.isEnabled = false
         downloadButton.setTitle("Loading...", for: .normal)
@@ -230,6 +233,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             DispatchQueue.main.async {
                 self.downloadButton.setTitle("Export", for: .normal)
                 self.downloadButton.isEnabled = true
+                self.isModalInPresentation = false
             }
         }
         
@@ -239,29 +243,29 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     @IBAction func blurnessSlider(_ sender: UISlider) {
         BlurValue = sender.value
-
+        
         // Safely unwrap `pdfURL`
         guard let pdfURL = pdfURL else {
             print("Error: pdfURL is nil")
             return
         }
-
+        
         // Access the security-scoped resource
         if pdfURL.startAccessingSecurityScopedResource() {
             defer { pdfURL.stopAccessingSecurityScopedResource() }
-
+            
             // Attempt to get the first page image
             guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
                 print("Error: Failed to convert PDF page to image")
                 return
             }
-
+            
             // Attempt to process the image
             guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
                 print("Error: Failed to process image with makeImageLookScanned")
                 return
             }
-
+            
             // Update the UI
             documentFirstPageImageView.image = updatedImage
         } else {
