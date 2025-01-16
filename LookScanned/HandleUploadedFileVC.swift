@@ -10,7 +10,9 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBOutlet weak var mainStackWidth: NSLayoutConstraint!
     
     
-    @IBOutlet weak var blurnessSliderWidthUI: NSLayoutConstraint!
+//    @IBOutlet weak var SliderWidthUI: NSLayoutConstraint!
+    
+    
     
     
     @IBOutlet weak var documentFirstPageImageView: UIImageView!
@@ -22,6 +24,8 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     var isAccessingSecurityScopedResource = false
     var pdfURL: URL?
     var BlurValue: Float = 0.3
+    var VarianceValueX: Float = 0.5
+    var VarianceValueY: Float = 0.005
     
     
     override func viewDidLoad() {
@@ -49,7 +53,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             print("Error: Unable to access security-scoped resource.")
         }
         
-        blurnessSliderWidthUI.constant = screenSize.width * 0.65
+//        SliderWidthUI.constant = screenSize.width * 0.65
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +88,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         guard let noiseImage = noiseFilter.outputImage else { return nil }
         
         // Scale down the noise intensity
-        let noiseTransform = CGAffineTransform(scaleX: 0.5, y: 0.005) // Adjust noise size
+        let noiseTransform = CGAffineTransform(scaleX: CGFloat(VarianceValueX), y: CGFloat(VarianceValueY)) // Adjust noise size
         let scaledNoise = noiseImage.transformed(by: noiseTransform)
         
         // Blend noise with the image
@@ -243,6 +247,71 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     @IBAction func blurnessSlider(_ sender: UISlider) {
         BlurValue = sender.value
+        
+        // Safely unwrap `pdfURL`
+        guard let pdfURL = pdfURL else {
+            print("Error: pdfURL is nil")
+            return
+        }
+        
+        // Access the security-scoped resource
+        if pdfURL.startAccessingSecurityScopedResource() {
+            defer { pdfURL.stopAccessingSecurityScopedResource() }
+            
+            // Attempt to get the first page image
+            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
+                print("Error: Failed to convert PDF page to image")
+                return
+            }
+            
+            // Attempt to process the image
+            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
+                print("Error: Failed to process image with makeImageLookScanned")
+                return
+            }
+            
+            // Update the UI
+            documentFirstPageImageView.image = updatedImage
+        } else {
+            print("Error: Unable to access security-scoped resource")
+        }
+    }
+    
+    @IBAction func varianceSliderX(_ sender: UISlider) {
+        VarianceValueX = sender.value
+        
+        // Safely unwrap `pdfURL`
+        guard let pdfURL = pdfURL else {
+            print("Error: pdfURL is nil")
+            return
+        }
+        
+        // Access the security-scoped resource
+        if pdfURL.startAccessingSecurityScopedResource() {
+            defer { pdfURL.stopAccessingSecurityScopedResource() }
+            
+            // Attempt to get the first page image
+            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
+                print("Error: Failed to convert PDF page to image")
+                return
+            }
+            
+            // Attempt to process the image
+            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
+                print("Error: Failed to process image with makeImageLookScanned")
+                return
+            }
+            
+            // Update the UI
+            documentFirstPageImageView.image = updatedImage
+        } else {
+            print("Error: Unable to access security-scoped resource")
+        }
+    }
+    
+    
+    @IBAction func varianceSliderY(_ sender: UISlider) {
+        VarianceValueY = sender.value
         
         // Safely unwrap `pdfURL`
         guard let pdfURL = pdfURL else {

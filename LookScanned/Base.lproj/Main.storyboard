@@ -73,34 +73,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="440" height="946"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pem-iA-gnD">
-                                <rect key="frame" x="-108" y="237.66666666666666" width="656" height="470.66666666666674"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pem-iA-gnD">
+                                <rect key="frame" x="10" y="185" width="420" height="576"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample-221-g-yellow-slip" translatesAutoresizingMaskIntoConstraints="NO" id="8BY-ph-gna">
-                                        <rect key="frame" x="0.0" y="0.0" width="656" height="379.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="420" height="379.66666666666669"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="379.5" id="gXQ-IP-3IM"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180.5" id="mRQ-uj-pjb"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="mRQ-uj-pjb"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blurness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ2-ZZ-N7y">
-                                        <rect key="frame" x="0.0" y="379.66666666666674" width="656" height="22.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="379.66666666666663" width="420" height="22.666666666666686"/>
                                         <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-dT-P7B">
-                                        <rect key="frame" x="-2" y="402.33333333333337" width="660" height="31"/>
+                                        <rect key="frame" x="-2" y="402.33333333333337" width="424" height="31"/>
                                         <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="656" id="wnL-zz-Q83"/>
-                                        </constraints>
                                         <connections>
                                             <action selector="blurnessSlider:" destination="nED-5h-eG4" eventType="valueChanged" id="GGo-H7-Rd7"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibrance X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBn-tl-BF8">
+                                        <rect key="frame" x="0.0" y="432.33333333333337" width="420" height="22.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.001" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GOk-vB-IdG">
+                                        <rect key="frame" x="-2" y="455" width="424" height="31"/>
+                                        <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="blurnessSlider:" destination="nED-5h-eG4" eventType="valueChanged" id="Dqt-Sb-z6g"/>
+                                            <action selector="varianceSliderX:" destination="nED-5h-eG4" eventType="valueChanged" id="1z8-o2-Qf3"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibrance Y" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfi-MD-dkt">
+                                        <rect key="frame" x="0.0" y="485" width="420" height="22.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.001" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pcw-nT-az9">
+                                        <rect key="frame" x="-2" y="507.66666666666663" width="424" height="31"/>
+                                        <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="blurnessSlider:" destination="nED-5h-eG4" eventType="valueChanged" id="XtW-2h-2BV"/>
+                                            <action selector="varianceSliderY:" destination="nED-5h-eG4" eventType="valueChanged" id="aQG-pq-adJ"/>
+                                        </connections>
+                                    </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhq-Ac-2Zb">
-                                        <rect key="frame" x="0.0" y="432.33333333333337" width="656" height="38.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="537.66666666666663" width="420" height="38.333333333333371"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Export"/>
                                         <connections>
@@ -114,12 +139,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Pem-iA-gnD" firstAttribute="centerY" secondItem="V8v-rP-bdd" secondAttribute="centerY" id="3v1-EA-qgN"/>
+                            <constraint firstItem="Pem-iA-gnD" firstAttribute="leading" secondItem="Eg0-QW-Jpg" secondAttribute="leading" constant="10" id="Gdj-ku-xg7"/>
                             <constraint firstItem="Pem-iA-gnD" firstAttribute="centerX" secondItem="V8v-rP-bdd" secondAttribute="centerX" id="nof-HH-LeI"/>
+                            <constraint firstItem="Eg0-QW-Jpg" firstAttribute="trailing" secondItem="Pem-iA-gnD" secondAttribute="trailing" constant="10" id="rfw-bZ-ft9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cSM-sO-BEv"/>
                     <connections>
-                        <outlet property="blurnessSliderWidthUI" destination="wnL-zz-Q83" id="H0B-QP-k9g"/>
                         <outlet property="documentFirstPageImageView" destination="8BY-ph-gna" id="Pla-DW-1ac"/>
                         <outlet property="downloadButton" destination="qhq-Ac-2Zb" id="Tjq-TV-0pL"/>
                     </connections>
