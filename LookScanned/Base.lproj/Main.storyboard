@@ -102,7 +102,7 @@
                                         <color key="textColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.001" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GOk-vB-IdG">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.01" minValue="0.001" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GOk-vB-IdG">
                                         <rect key="frame" x="-2" y="455" width="424" height="31"/>
                                         <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>

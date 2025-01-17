@@ -31,7 +31,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = true
-        let screenSize: CGRect = UIScreen.main.bounds
+//        let screenSize: CGRect = UIScreen.main.bounds
         //        mainStackHeight.constant = screenSize.height * 0.85
         //        mainStackWidth.constant = screenSize.width * 0.85
         
@@ -308,7 +308,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             print("Error: Unable to access security-scoped resource")
         }
     }
-    
+//    
     
     @IBAction func varianceSliderY(_ sender: UISlider) {
         VarianceValueY = sender.value
