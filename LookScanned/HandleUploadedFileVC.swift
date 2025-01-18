@@ -143,6 +143,38 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         return img
     }
     
+    
+    func refreshPreviewImage() {
+        // Safely unwrap `pdfURL`
+        guard let pdfURL = pdfURL else {
+            print("Error: pdfURL is nil")
+            return
+        }
+        
+        // Access the security-scoped resource
+        if pdfURL.startAccessingSecurityScopedResource() {
+            defer { pdfURL.stopAccessingSecurityScopedResource() }
+            
+            // Attempt to get the first page image
+            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
+                print("Error: Failed to convert PDF page to image")
+                return
+            }
+            
+            // Attempt to process the image
+            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
+                print("Error: Failed to process image with makeImageLookScanned")
+                return
+            }
+            
+            // Update the UI
+            documentFirstPageImageView.image = updatedImage
+        } else {
+            print("Error: Unable to access security-scoped resource")
+        }
+        
+    }
+    
     func compressImage(_ image: UIImage, quality: CGFloat = 0.5) -> UIImage? {
         guard let jpegData = image.jpegData(compressionQuality: quality) else {
             print("Error: Could not compress image.")
@@ -257,98 +289,20 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBAction func blurnessSlider(_ sender: UISlider) {
         BlurValue = sender.value
         
-        // Safely unwrap `pdfURL`
-        guard let pdfURL = pdfURL else {
-            print("Error: pdfURL is nil")
-            return
-        }
-        
-        // Access the security-scoped resource
-        if pdfURL.startAccessingSecurityScopedResource() {
-            defer { pdfURL.stopAccessingSecurityScopedResource() }
-            
-            // Attempt to get the first page image
-            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
-                print("Error: Failed to convert PDF page to image")
-                return
-            }
-            
-            // Attempt to process the image
-            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
-                print("Error: Failed to process image with makeImageLookScanned")
-                return
-            }
-            
-            // Update the UI
-            documentFirstPageImageView.image = updatedImage
-        } else {
-            print("Error: Unable to access security-scoped resource")
-        }
+        refreshPreviewImage()
     }
     
     @IBAction func varianceSliderX(_ sender: UISlider) {
         VarianceValueX = sender.value
         
-        // Safely unwrap `pdfURL`
-        guard let pdfURL = pdfURL else {
-            print("Error: pdfURL is nil")
-            return
-        }
-        
-        // Access the security-scoped resource
-        if pdfURL.startAccessingSecurityScopedResource() {
-            defer { pdfURL.stopAccessingSecurityScopedResource() }
-            
-            // Attempt to get the first page image
-            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
-                print("Error: Failed to convert PDF page to image")
-                return
-            }
-            
-            // Attempt to process the image
-            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
-                print("Error: Failed to process image with makeImageLookScanned")
-                return
-            }
-            
-            // Update the UI
-            documentFirstPageImageView.image = updatedImage
-        } else {
-            print("Error: Unable to access security-scoped resource")
-        }
+        refreshPreviewImage()
     }
 //    
     
     @IBAction func varianceSliderY(_ sender: UISlider) {
         VarianceValueY = sender.value
         
-        // Safely unwrap `pdfURL`
-        guard let pdfURL = pdfURL else {
-            print("Error: pdfURL is nil")
-            return
-        }
-        
-        // Access the security-scoped resource
-        if pdfURL.startAccessingSecurityScopedResource() {
-            defer { pdfURL.stopAccessingSecurityScopedResource() }
-            
-            // Attempt to get the first page image
-            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
-                print("Error: Failed to convert PDF page to image")
-                return
-            }
-            
-            // Attempt to process the image
-            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
-                print("Error: Failed to process image with makeImageLookScanned")
-                return
-            }
-            
-            // Update the UI
-            documentFirstPageImageView.image = updatedImage
-        } else {
-            print("Error: Unable to access security-scoped resource")
-        }
+        refreshPreviewImage()
     }
     
     
@@ -361,35 +315,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBAction func grayScaleToggle(_ sender: UISwitch) {
         grayScale = !grayScale
         
-        // Safely unwrap `pdfURL`
-        guard let pdfURL = pdfURL else {
-            print("Error: pdfURL is nil")
-            return
-        }
-        
-        // Access the security-scoped resource
-        if pdfURL.startAccessingSecurityScopedResource() {
-            defer { pdfURL.stopAccessingSecurityScopedResource() }
-            
-            // Attempt to get the first page image
-            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
-                print("Error: Failed to convert PDF page to image")
-                return
-            }
-            
-            // Attempt to process the image
-            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
-                print("Error: Failed to process image with makeImageLookScanned")
-                return
-            }
-            
-            // Update the UI
-            documentFirstPageImageView.image = updatedImage
-        } else {
-            print("Error: Unable to access security-scoped resource")
-        }
-        
-        print("Current grayScale is: \(grayScale)")
+        refreshPreviewImage()
     }
     
     
