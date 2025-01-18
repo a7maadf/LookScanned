@@ -26,6 +26,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     var BlurValue: Float = 0.3
     var VarianceValueX: Float = 0.5
     var VarianceValueY: Float = 0.005
+    var grayScale: Bool = true
     
     
     override func viewDidLoad() {
@@ -73,15 +74,23 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         let context = CIContext()
         
         // 1. Convert to grayscale (black and white)
-        guard let grayscaleFilter = CIFilter(name: "CIPhotoEffectMono") else { return nil }
-        grayscaleFilter.setValue(ciImage, forKey: kCIInputImageKey)
-        guard let grayscaleImage = grayscaleFilter.outputImage else { return nil }
-        
+        var grayscaleImage: CIImage // Declare the variable outside the if-else blocks
+
+        if grayScale != false {
+            guard let grayscaleFilter = CIFilter(name: "CIPhotoEffectMono") else { return nil }
+            grayscaleFilter.setValue(ciImage, forKey: kCIInputImageKey)
+            guard let outputImage = grayscaleFilter.outputImage else { return nil }
+            grayscaleImage = outputImage // Assign the output to the declared variable
+        } else {
+            grayscaleImage = ciImage // Assign ciImage to the declared variable
+        }
+
         // 2. Apply a very subtle blur
         guard let blurFilter = CIFilter(name: "CIGaussianBlur") else { return nil }
         blurFilter.setValue(grayscaleImage, forKey: kCIInputImageKey)
         blurFilter.setValue(BlurValue, forKey: kCIInputRadiusKey) // Reduced blur for sharpness
         guard let blurredImage = blurFilter.outputImage else { return nil }
+
         
         // 3. Add small noise
         guard let noiseFilter = CIFilter(name: "CIRandomGenerator") else { return nil }
@@ -347,6 +356,43 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBAction func backToATapped(_ sender: UIButton) {
         performSegue(withIdentifier: "goBackHome", sender: self)
     }
+    
+    
+    @IBAction func grayScaleToggle(_ sender: UISwitch) {
+        grayScale = !grayScale
+        
+        // Safely unwrap `pdfURL`
+        guard let pdfURL = pdfURL else {
+            print("Error: pdfURL is nil")
+            return
+        }
+        
+        // Access the security-scoped resource
+        if pdfURL.startAccessingSecurityScopedResource() {
+            defer { pdfURL.stopAccessingSecurityScopedResource() }
+            
+            // Attempt to get the first page image
+            guard let firstPageImage = convertPDFPageToImage(url: pdfURL, pageNumber: 1) else {
+                print("Error: Failed to convert PDF page to image")
+                return
+            }
+            
+            // Attempt to process the image
+            guard let updatedImage = makeImageLookScanned(image: firstPageImage) else {
+                print("Error: Failed to process image with makeImageLookScanned")
+                return
+            }
+            
+            // Update the UI
+            documentFirstPageImageView.image = updatedImage
+        } else {
+            print("Error: Unable to access security-scoped resource")
+        }
+        
+        print("Current grayScale is: \(grayScale)")
+    }
+    
+    
     
     
 }
