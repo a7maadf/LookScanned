@@ -10,7 +10,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     @IBOutlet weak var mainStackWidth: NSLayoutConstraint!
     
     
-//    @IBOutlet weak var SliderWidthUI: NSLayoutConstraint!
+    //    @IBOutlet weak var SliderWidthUI: NSLayoutConstraint!
     
     
     
@@ -28,12 +28,13 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     var VarianceValueY: Float = 0.005
     var grayScale: Bool = true
     var roationActivated: Bool = false
+    var addWatermarkActivated: Bool = true
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = true
-//        let screenSize: CGRect = UIScreen.main.bounds
+        //        let screenSize: CGRect = UIScreen.main.bounds
         //        mainStackHeight.constant = screenSize.height * 0.85
         //        mainStackWidth.constant = screenSize.width * 0.85
         
@@ -55,7 +56,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             print("Error: Unable to access security-scoped resource.")
         }
         
-//        SliderWidthUI.constant = screenSize.width * 0.65
+        //        SliderWidthUI.constant = screenSize.width * 0.65
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +77,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         
         // 1. Convert to grayscale (black and white)
         var grayscaleImage: CIImage // Declare the variable outside the if-else blocks
-
+        
         if grayScale != false {
             guard let grayscaleFilter = CIFilter(name: "CIPhotoEffectMono") else { return nil }
             grayscaleFilter.setValue(ciImage, forKey: kCIInputImageKey)
@@ -85,13 +86,13 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         } else {
             grayscaleImage = ciImage // Assign ciImage to the declared variable
         }
-
+        
         // 2. Apply a very subtle blur
         guard let blurFilter = CIFilter(name: "CIGaussianBlur") else { return nil }
         blurFilter.setValue(grayscaleImage, forKey: kCIInputImageKey)
         blurFilter.setValue(BlurValue, forKey: kCIInputRadiusKey) // Reduced blur for sharpness
         guard let blurredImage = blurFilter.outputImage else { return nil }
-
+        
         
         // 3. Add small noise
         guard let noiseFilter = CIFilter(name: "CIRandomGenerator") else { return nil }
@@ -207,6 +208,21 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
                         if let compressedImage = compressImage(image, quality: 0.5) {
                             context.beginPage()
                             compressedImage.draw(in: CGRect(x: 0, y: 0, width: 595, height: 842))
+                            
+                            if addWatermarkActivated {
+                                // Add footer text to the bottom-right corner
+                                let footerText = "Scanned by CamScanner"
+                                let attributes: [NSAttributedString.Key: Any] = [
+                                    .font: UIFont.systemFont(ofSize: 10),
+                                    .foregroundColor: UIColor.black
+                                ]
+                                let textSize = footerText.size(withAttributes: attributes)
+                                let footerX = 595 - textSize.width - 20 // 20-point margin from the right edge
+                                let footerY = 842 - textSize.height - 20 // 20-point margin from the bottom edge
+                                footerText.draw(at: CGPoint(x: footerX, y: footerY), withAttributes: attributes)
+                            }
+                            
+                            
                             print("Successfully added page \(pageNumber) to the new PDF.")
                         } else {
                             print("Failed to compress page \(pageNumber). Skipping.")
@@ -302,7 +318,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         
         refreshPreviewImage()
     }
-//    
+    //
     
     @IBAction func varianceSliderY(_ sender: UISlider) {
         VarianceValueY = sender.value
@@ -329,6 +345,12 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         
         refreshPreviewImage()
     }
+    
+    
+    @IBAction func csmscannerwatermarktoggle(_ sender: UISwitch) {
+        addWatermarkActivated = !addWatermarkActivated
+    }
+    
     
     
 }
