@@ -5,7 +5,7 @@
 
 LookScanned is a simple, lightweight, and Free and Open Source Software (FOSS) iOS app that mimics the look of a scanned document for any PDF file. With LookScanned, you can transform your digital documents into a realistic scanned appearance, making them perfect for sharing or archiving.
 
-## Appstore link
+## Download link
 
 [https://apps.apple.com/app/lookscanned/id6740463698](https://apps.apple.com/app/lookscanned/id6740463698)
 
