@@ -344,4 +344,9 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     
     
     
+    @IBAction func backToATapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "goBackHome", sender: self)
+    }
+    
+    
 }

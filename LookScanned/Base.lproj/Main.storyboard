@@ -134,12 +134,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wc-ba-dPU">
+                                <rect key="frame" x="370.33333333333331" y="50" width="49.666666666666686" height="34.333333333333343"/>
+                                <color key="tintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="backToATapped:" destination="nED-5h-eG4" eventType="touchUpInside" id="PRy-j2-Xm8"/>
+                                    <segue destination="H92-Wm-IOg" kind="unwind" identifier="goBackHome" unwindAction="unwindToFirstViewController:" id="6gn-bQ-c7t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eg0-QW-Jpg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Pem-iA-gnD" firstAttribute="centerY" secondItem="V8v-rP-bdd" secondAttribute="centerY" id="3v1-EA-qgN"/>
                             <constraint firstItem="Pem-iA-gnD" firstAttribute="leading" secondItem="Eg0-QW-Jpg" secondAttribute="leading" constant="10" id="Gdj-ku-xg7"/>
+                            <constraint firstItem="Eg0-QW-Jpg" firstAttribute="trailing" secondItem="1wc-ba-dPU" secondAttribute="trailing" constant="20" id="Rri-Na-uje"/>
+                            <constraint firstItem="1wc-ba-dPU" firstAttribute="top" secondItem="Eg0-QW-Jpg" secondAttribute="top" constant="50" id="jVa-IO-z9m"/>
                             <constraint firstItem="Pem-iA-gnD" firstAttribute="centerX" secondItem="V8v-rP-bdd" secondAttribute="centerX" id="nof-HH-LeI"/>
                             <constraint firstItem="Eg0-QW-Jpg" firstAttribute="trailing" secondItem="Pem-iA-gnD" secondAttribute="trailing" constant="10" id="rfw-bZ-ft9"/>
                         </constraints>
@@ -151,13 +163,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMl-yc-D9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="H92-Wm-IOg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="954.96183206106866" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="954.54545454545462" y="3.1380753138075317"/>
         </scene>
     </scenes>
     <resources>
         <image name="Sample-221-g-yellow-slip" width="600" height="873"/>
         <image name="upload-file" width="512" height="512"/>
+        <image name="xmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
