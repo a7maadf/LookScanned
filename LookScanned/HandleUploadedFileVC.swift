@@ -27,6 +27,7 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     var VarianceValueX: Float = 0.5
     var VarianceValueY: Float = 0.005
     var grayScale: Bool = true
+    var roationActivated: Bool = false
     
     
     override func viewDidLoad() {
@@ -107,8 +108,12 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
         guard let noisyImage = blendFilter.outputImage else { return nil }
         
         // 4. Apply a very slight rotation
-        let rotationTransform = CGAffineTransform(rotationAngle: CGFloat.random(in: -0.03...0.03)) // Subtle rotation
-        let rotatedImage = noisyImage.transformed(by: rotationTransform)
+        var rotatedImage = noisyImage
+        if roationActivated == true {
+            let rotationTransform = CGAffineTransform(rotationAngle: CGFloat.random(in: -0.03...0.03)) // Subtle rotation
+            rotatedImage = noisyImage.transformed(by: rotationTransform)
+        }
+        
         
         // Render the final image
         if let outputCGImage = context.createCGImage(rotatedImage, from: rotatedImage.extent) {
@@ -319,6 +324,11 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
     }
     
     
+    @IBAction func rotationToggle(_ sender: UISwitch) {
+        roationActivated = !roationActivated
+        
+        refreshPreviewImage()
+    }
     
     
 }

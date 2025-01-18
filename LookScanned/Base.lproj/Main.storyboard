@@ -154,6 +154,9 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IUr-ka-f6M">
                                                 <rect key="frame" x="371" y="0.0" width="51" height="31"/>
                                                 <color key="onTintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="rotationToggle:" destination="nED-5h-eG4" eventType="valueChanged" id="d4E-ZL-3EA"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
