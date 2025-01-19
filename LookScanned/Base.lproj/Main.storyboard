@@ -174,7 +174,6 @@
                                                 <color key="onTintColor" red="1" green="0.39607843139999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
                                                     <action selector="csmscannerwatermarktoggle:" destination="nED-5h-eG4" eventType="valueChanged" id="g47-AY-X8B"/>
-                                                    <action selector="rotationToggle:" destination="nED-5h-eG4" eventType="valueChanged" id="NFo-hB-QWG"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
