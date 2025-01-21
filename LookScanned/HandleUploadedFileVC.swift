@@ -44,6 +44,8 @@ class HandleUploadedFileVC: UIViewController, UIDocumentPickerDelegate {
             return
         }
         
+        // comment
+        
         if pdfURL.startAccessingSecurityScopedResource() {
             isAccessingSecurityScopedResource = true
             defer { pdfURL.stopAccessingSecurityScopedResource() } // Added for safety
